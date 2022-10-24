@@ -13,13 +13,13 @@ WHERE CarInfo.idCar == :carId AND modelcar.company_idCompany == company.idCompan
 '''
 cursor.execute(query, {'carId': 14})
 
-# вывести все объявления владельца
+# вывести все автомобили с указанной трансмиссией
 query = '''
-SELECT *
-FROM advertisment
-WHERE owner_idOwner == :owner
+SELECT idCar
+FROM car JOIN drivetrain ON car.drivetrain_idDrivetrain == drivetrain.idDrivetrain
+WHERE :drivetrain == car.drivetrain_idDrivetrain
 '''
-# cursor.execute(query, {'owner': 3})
+cursor.execute(query, {'drivetrain': 3})
 
 # df = pd.read_sql(query, con)
 print(cursor.fetchall())
